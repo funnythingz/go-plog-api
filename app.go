@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/funnythingz/iroiro-api/db"
-	"github.com/funnythingz/iroiro-api/handler"
+	"github.com/funnythingz/go-plog-api/db"
+	"github.com/funnythingz/go-plog-api/handler"
 	_ "github.com/zenazn/goji"
 	"github.com/zenazn/goji/bind"
 	"github.com/zenazn/goji/graceful"
@@ -12,7 +12,7 @@ import (
 
 var (
 	exceptionHandler = &handler.ExceptionHandler{}
-	iroiroHandler    = &handler.IroiroHandler{}
+	plogsHandler     = &handler.PlogsHandler{}
 	colorsHandler    = &handler.ColorsHandler{}
 )
 
@@ -23,16 +23,15 @@ func main() {
 	// Goji
 	m := web.New()
 
-	// Iroiro
-	m.Get("/v1/iroiro", iroiroHandler.Iroiro)
-	m.Post("/v1/iroiro", iroiroHandler.CreateIro)
-	m.Get(regexp.MustCompile(`^/v1/iroiro/(?P<id>\d+)$`), iroiroHandler.Iro)
-	m.Put(regexp.MustCompile(`^/v1/iroiro/(?P<id>\d+)$`), iroiroHandler.UpdateIro)
+	// Plogs
+	m.Get("/api/v1/plogs", plogsHandler.Plogs)
+	m.Post("/api/v1/plogs", plogsHandler.CreatePlog)
+	m.Get(regexp.MustCompile(`^/api/v1/plogs/(?P<id>\d+)$`), plogsHandler.Plog)
 
 	// Colors
 	m.Get("/v1/colors", colorsHandler.Colors)
 	m.Post("/v1/colors", colorsHandler.CreateColor)
-	m.Get(regexp.MustCompile(`^/v1/colors/(?P<id>\d+)$`), colorsHandler.Color)
+	m.Get(regexp.MustCompile(`^/api/v1/colors/(?P<id>\d+)$`), colorsHandler.Color)
 
 	// Exception
 	m.NotFound(exceptionHandler.NotFound)

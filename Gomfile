@@ -6,7 +6,6 @@ gom 'github.com/zenazn/goji'
 gom 'github.com/goji/param'
 
 group :development do
-    gom 'github.com/codegangsta/gin'
 end
 
 group :production do

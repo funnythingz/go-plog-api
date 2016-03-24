@@ -3,10 +3,10 @@ package handler
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/funnythingz/iroiro-api/domain"
-	"github.com/funnythingz/iroiro-api/helper"
-	"github.com/funnythingz/iroiro-api/repositories"
-	"github.com/funnythingz/iroiro-api/services"
+	"github.com/funnythingz/go-plog-api/helper"
+	"github.com/funnythingz/go-plog-api/model"
+	"github.com/funnythingz/go-plog-api/repositories"
+	"github.com/funnythingz/go-plog-api/services"
 	_ "github.com/k0kubun/pp"
 	"github.com/zenazn/goji/web"
 	"io"
@@ -63,17 +63,17 @@ func (h *ColorsHandler) CreateColor(c web.C, w http.ResponseWriter, r *http.Requ
 	}
 
 	name := r.FormValue("color[name]")
-	code := r.FormValue("color[code]")
+	code := r.FormValue("color[color_code]")
 	textCode := r.FormValue("color[text_code]")
 
 	// Validation
 	errors := []string{}
 
 	if utf8.RuneCountInString(code) <= 0 {
-		errors = append(errors, "input Code must be blank.")
+		errors = append(errors, "input ColorCode must be blank.")
 	}
 	if codeMatched, _ := regexp.MatchString("^#[0-9a-fA-F]{6}$", code); !codeMatched {
-		errors = append(errors, "input Code ex: #1a2b3c")
+		errors = append(errors, "input ColorCode ex: #1a2b3c")
 	}
 	if utf8.RuneCountInString(textCode) <= 0 {
 		errors = append(errors, "input TextCode must be blank.")
@@ -94,7 +94,7 @@ func (h *ColorsHandler) CreateColor(c web.C, w http.ResponseWriter, r *http.Requ
 	}
 
 	// New
-	color := domain.Color{
+	color := model.Color{
 		Name:     name,
 		Code:     code,
 		TextCode: textCode,

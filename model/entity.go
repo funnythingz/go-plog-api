@@ -1,11 +1,11 @@
-package ddd
+package model
 
 import (
 	"time"
 )
 
-type EntityMapper struct {
-	Id        int
+type Entity struct {
+	Id        int `json:"id"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }

@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/funnythingz/iroiro-api/db"
-	"github.com/funnythingz/iroiro-api/mapper"
+	"github.com/funnythingz/go-plog-api/db"
+	"github.com/funnythingz/go-plog-api/model"
 	"log"
 	"os"
 )
@@ -30,17 +30,17 @@ func main() {
 }
 
 func Reset() {
-	db.Dbmap.DropTableIfExists(&mapper.Iro{})
-	db.Dbmap.DropTableIfExists(&mapper.Color{})
+	db.Dbmap.DropTableIfExists(&model.Plog{})
+	db.Dbmap.DropTableIfExists(&model.Color{})
 	Create()
 }
 
 func Create() {
-	db.Dbmap.CreateTable(&mapper.Iro{})
-	db.Dbmap.CreateTable(&mapper.Color{})
+	db.Dbmap.CreateTable(&model.Plog{})
+	db.Dbmap.CreateTable(&model.Color{})
 }
 
 func Migrate() {
-	db.Dbmap.AutoMigrate(&mapper.Iro{})
-	db.Dbmap.AutoMigrate(&mapper.Color{})
+	db.Dbmap.AutoMigrate(&model.Plog{})
+	db.Dbmap.AutoMigrate(&model.Color{})
 }

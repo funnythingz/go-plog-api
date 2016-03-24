@@ -1,23 +1,15 @@
-package mapper
+package model
 
 import (
 	"github.com/funnythingz/iroiro-api/db"
-	"github.com/funnythingz/iroiro-api/ddd"
-	"github.com/funnythingz/iroiro-api/domain"
 	_ "github.com/k0kubun/pp"
 )
 
 type Color struct {
-	ddd.EntityMapper
-	Name     string
-	Code     string
-	TextCode string
-}
-
-func (m *Color) Map(color domain.Color) {
-	m.Name = color.Name
-	m.Code = color.Code
-	m.TextCode = color.TextCode
+	Entity
+	Name     string `json:"name"`
+	Code     string `json:"color_code"`
+	TextCode string `json:"text_code"`
 }
 
 func (m *Color) Commit() {
