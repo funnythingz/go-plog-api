@@ -7,15 +7,8 @@ import (
 
 type Plog struct {
 	Entity
-	Color   Color `json:"color"`
-	Content strin `json:"content"`
-}
-
-func (m *Plog) Map(plog *Plog) {
-	m.ColorId = plog.Color.Entity.Id
-	m.Content = plog.Content
-	m.ReIroId = plog.ReIroId
-	m.ReIroIro = plog.ReIroIro
+	Color   Color  `json:"color"`
+	Content string `json:"content"`
 }
 
 func (m *Plog) Commit() {
