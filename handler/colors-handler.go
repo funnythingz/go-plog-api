@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"github.com/funnythingz/go-plog-api/helper"
 	"github.com/funnythingz/go-plog-api/model"
-	"github.com/funnythingz/go-plog-api/repositories"
 	"github.com/funnythingz/go-plog-api/services"
 	_ "github.com/k0kubun/pp"
 	"github.com/zenazn/goji/web"
@@ -35,7 +34,8 @@ func (h *ColorsHandler) Colors(c web.C, w http.ResponseWriter, r *http.Request) 
 		page, _ = strconv.Atoi(urlQuery["page"][0])
 	}
 
-	colors := repositories.ColorRepo.FetchList(permit, page)
+	colors := model.ColorList{}
+	colors.Fetch(permit, page)
 	response, _ := json.Marshal(colors)
 	io.WriteString(w, string(response))
 }
@@ -47,7 +47,8 @@ func (h *ColorsHandler) Color(c web.C, w http.ResponseWriter, r *http.Request) {
 	}
 
 	id, _ := strconv.Atoi(c.URLParams["id"])
-	color := repositories.ColorRepo.Fetch(id)
+	color := model.Color{}
+	color.Fetch(id)
 	if color.Id == 0 {
 		helper.ResultMessageJSON(w, []string{fmt.Sprintf("Not Found: %d", id)})
 		return
@@ -100,7 +101,7 @@ func (h *ColorsHandler) CreateColor(c web.C, w http.ResponseWriter, r *http.Requ
 		TextCode: textCode,
 	}
 
-	resultColor := repositories.ColorRepo.Commit(color)
-	response, _ := json.Marshal(resultColor)
+	color.Commit()
+	response, _ := json.Marshal(color)
 	io.WriteString(w, string(response))
 }

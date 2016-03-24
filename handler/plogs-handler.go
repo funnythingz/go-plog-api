@@ -33,7 +33,8 @@ func (h *PlogsHanlder) Plogs(c web.C, w http.ResponseWriter, r *http.Request) {
 		page, _ = strconv.Atoi(urlQuery["page"][0])
 	}
 
-	plogs := repositories.PlogRepo.ResolveList(permit, page)
+	plogs := model.PlogList{}
+	plogs.Fetch(permit, page)
 	response, _ := json.Marshal(plogs)
 	io.WriteString(w, string(response))
 }
