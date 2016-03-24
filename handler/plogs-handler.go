@@ -15,9 +15,9 @@ import (
 	"unicode/utf8"
 )
 
-type PlogsHanlder struct{}
+type PlogsHandler struct{}
 
-func (h *PlogsHanlder) Plogs(c web.C, w http.ResponseWriter, r *http.Request) {
+func (h *PlogsHandler) Plogs(c web.C, w http.ResponseWriter, r *http.Request) {
 
 	if service.BeforeAuth(w, r) == false {
 		return
@@ -39,7 +39,7 @@ func (h *PlogsHanlder) Plogs(c web.C, w http.ResponseWriter, r *http.Request) {
 	io.WriteString(w, string(response))
 }
 
-func (h *PlogsHanlder) Plog(c web.C, w http.ResponseWriter, r *http.Request) {
+func (h *PlogsHandler) Plog(c web.C, w http.ResponseWriter, r *http.Request) {
 
 	if service.BeforeAuth(w, r) == false {
 		return
@@ -56,7 +56,7 @@ func (h *PlogsHanlder) Plog(c web.C, w http.ResponseWriter, r *http.Request) {
 	io.WriteString(w, string(response))
 }
 
-func (h *PlogsHanlder) CreatePlog(c web.C, w http.ResponseWriter, r *http.Request) {
+func (h *PlogsHandler) CreatePlog(c web.C, w http.ResponseWriter, r *http.Request) {
 
 	if service.BeforeAuth(w, r) == false {
 		return
