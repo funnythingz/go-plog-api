@@ -9,7 +9,7 @@ import (
 	"log"
 )
 
-var Dbmap gorm.DB
+var Dbmap *gorm.DB
 
 func DbOpen(
 	adapter string,
