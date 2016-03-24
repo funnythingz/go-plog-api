@@ -46,7 +46,7 @@ func (h *PlogsHanlder) Plog(c web.C, w http.ResponseWriter, r *http.Request) {
 	}
 
 	id, _ := strconv.Atoi(c.URLParams["id"])
-	plog := Plog{}
+	plog := model.Plog{}
 	plog.Fetch(id)
 	if plog.Id == 0 {
 		helper.ResultMessageJSON(w, []string{fmt.Sprintf("Not Found: %d", id)})
