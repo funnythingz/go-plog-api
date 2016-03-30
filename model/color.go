@@ -1,7 +1,7 @@
 package model
 
 import (
-	"../db"
+	"github.com/funnyhingz/go-plog-api/db"
 	_ "github.com/k0kubun/pp"
 )
 
