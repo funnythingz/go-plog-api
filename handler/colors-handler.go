@@ -1,11 +1,11 @@
 package handler
 
 import (
+	"../helper"
+	"../model"
+	"../services"
 	"encoding/json"
 	"fmt"
-	"github.com/funnythingz/go-plog-api/helper"
-	"github.com/funnythingz/go-plog-api/model"
-	"github.com/funnythingz/go-plog-api/services"
 	_ "github.com/k0kubun/pp"
 	"github.com/zenazn/goji/web"
 	"io"

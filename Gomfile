@@ -4,7 +4,6 @@ gom 'github.com/k0kubun/pp'
 gom 'github.com/BurntSushi/toml'
 gom 'github.com/zenazn/goji'
 gom 'github.com/goji/param'
-gom 'github.com/funnythingz/go-plog-api'
 
 group :development do
 end

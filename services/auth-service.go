@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/funnythingz/go-plog-api/config"
+	"../config"
 	"net/http"
 	"net/url"
 )

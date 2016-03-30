@@ -1,9 +1,9 @@
 package main
 
 import (
+	"../db"
+	"../model"
 	"fmt"
-	"github.com/funnythingz/go-plog-api/db"
-	"github.com/funnythingz/go-plog-api/model"
 	"log"
 	"os"
 )
