@@ -3,9 +3,9 @@ package handler
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/funnyhingz/go-plog-api/helper"
-	"github.com/funnyhingz/go-plog-api/model"
-	"github.com/funnyhingz/go-plog-api/services"
+	"github.com/funnythingz/go-plog-api/helper"
+	"github.com/funnythingz/go-plog-api/model"
+	"github.com/funnythingz/go-plog-api/services"
 	_ "github.com/k0kubun/pp"
 	"github.com/zenazn/goji/web"
 	"io"

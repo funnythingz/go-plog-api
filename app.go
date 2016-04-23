@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/funnyhingz/go-plog-api/db"
-	"github.com/funnyhingz/go-plog-api/handler"
+	"github.com/funnythingz/go-plog-api/db"
+	"github.com/funnythingz/go-plog-api/handler"
 	_ "github.com/zenazn/goji"
 	"github.com/zenazn/goji/bind"
 	"github.com/zenazn/goji/graceful"

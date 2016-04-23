@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/funnyhingz/go-plog-api/db"
-	"github.com/funnyhingz/go-plog-api/model"
+	"github.com/funnythingz/go-plog-api/db"
+	"github.com/funnythingz/go-plog-api/model"
 	"log"
 	"os"
 )
