@@ -22,7 +22,7 @@ func (m *Color) Fetch(id int) {
 }
 
 type ColorList struct {
-	ColorList []Color
+	ColorList []Color `json:"color_list"`
 }
 
 func (m *ColorList) Fetch(permit int, page int) {
