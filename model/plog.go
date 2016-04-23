@@ -26,7 +26,7 @@ func (m *Plog) Fetch(id int) {
 }
 
 type PlogList struct {
-	PlogList []Plog
+	PlogList []Plog `json:"plog_list"`
 }
 
 func (m *PlogList) Fetch(permit int, page int) {
