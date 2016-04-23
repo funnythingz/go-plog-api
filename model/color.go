@@ -26,5 +26,5 @@ type ColorList struct {
 }
 
 func (m *ColorList) Fetch(permit int, page int) {
-	db.Dbmap.Order("id desc").Offset((page - 1) * permit).Limit(permit).Find(&m.ColorList).Offset(page * permit).Limit(permit)
+	db.Dbmap.Order("id asc").Offset((page - 1) * permit).Limit(permit).Find(&m.ColorList).Offset(page * permit).Limit(permit)
 }
