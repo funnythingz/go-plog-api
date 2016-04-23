@@ -3,11 +3,12 @@ package main
 import (
 	"github.com/funnythingz/go-plog-api/db"
 	"github.com/funnythingz/go-plog-api/handler"
-	_ "github.com/zenazn/goji"
-	"github.com/zenazn/goji/bind"
-	"github.com/zenazn/goji/graceful"
-	"github.com/zenazn/goji/web"
+	"net/http"
 	"regexp"
+
+	"goji.io"
+	"goji.io/pat"
+	"golang.org/x/net/context"
 )
 
 var (
@@ -16,26 +17,26 @@ var (
 	colorsHandler    = &handler.ColorsHandler{}
 )
 
-func main() {
+func init() {
 	// Database
 	db.Connect()
 
 	// Goji
-	m := web.New()
+	mux := goji.NewMux()
 
 	// Plogs
-	m.Get("/api/v1/plogs", plogsHandler.Plogs)
-	m.Post("/api/v1/plogs", plogsHandler.CreatePlog)
-	m.Get(regexp.MustCompile(`^/api/v1/plogs/(?P<id>\d+)$`), plogsHandler.Plog)
+	mux.HandlerFuncC(pat.Get("/api/v1/plogs"), plogsHandler.Plogs)
+	mux.HandlerFuncC(pat.Post("/api/v1/plogs"), plogsHandler.CreatePlog)
+	mux.HandlerFuncC(pat.Get(regexp.MustCompile(`^/api/v1/plogs/(?P<id>\d+)$`)), plogsHandler.Plog)
 
 	// Colors
-	m.Get("/v1/colors", colorsHandler.Colors)
-	m.Post("/v1/colors", colorsHandler.CreateColor)
-	m.Get(regexp.MustCompile(`^/api/v1/colors/(?P<id>\d+)$`), colorsHandler.Color)
+	mux.HandlerFuncC(pat.Get("/v1/colors"), colorsHandler.Colors)
+	mux.HandlerFuncC(pat.Post("/v1/colors"), colorsHandler.CreateColor)
+	mux.HandlerFuncC(pat.Get(regexp.MustCompile(`^/api/v1/colors/(?P<id>\d+)$`)), colorsHandler.Color)
 
 	// Exception
-	m.NotFound(exceptionHandler.NotFound)
+	mux.NotFound(exceptionHandler.NotFound)
 
 	// Serve
-	graceful.Serve(bind.Default(), m)
+	http.Handle("/", mux)
 }
