@@ -27,7 +27,7 @@ $ curl -i /api/v1/plogs/:id\?access_key=unkounko
 #### POST Plog
 
 ```
-$ curl -i -F "plog[content]=hello world" -F "color[id]=2" /api/v1/plogs\?access_key=unkounko
+$ curl -i -F "plog[content]=hello world" -F "color[color_id]=2" /api/v1/plogs\?access_key=unkounko
 ```
 
 ### Color

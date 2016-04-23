@@ -87,6 +87,7 @@ func (h *PlogsHandler) CreatePlog(c context.Context, w http.ResponseWriter, r *h
 				Id: colorId,
 			},
 		},
+		ColorId: colorId,
 		Content: content,
 	}
 

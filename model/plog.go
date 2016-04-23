@@ -8,6 +8,7 @@ import (
 type Plog struct {
 	Entity
 	Color   Color  `json:"color"`
+	ColorId int    `json:color_id`
 	Content string `json:"content"`
 }
 
