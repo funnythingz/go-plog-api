@@ -7,7 +7,8 @@ import (
 	"github.com/funnythingz/go-plog-api/model"
 	"github.com/funnythingz/go-plog-api/services"
 	_ "github.com/k0kubun/pp"
-	"github.com/zenazn/goji/web"
+	"goji.io/pat"
+	"golang.org/x/net/context"
 	"io"
 	"net/http"
 	"net/url"
@@ -17,7 +18,7 @@ import (
 
 type PlogsHandler struct{}
 
-func (h *PlogsHandler) Plogs(c web.C, w http.ResponseWriter, r *http.Request) {
+func (h *PlogsHandler) Plogs(c context.Context, w http.ResponseWriter, r *http.Request) {
 
 	if service.BeforeAuth(w, r) == false {
 		return
@@ -39,13 +40,13 @@ func (h *PlogsHandler) Plogs(c web.C, w http.ResponseWriter, r *http.Request) {
 	io.WriteString(w, string(response))
 }
 
-func (h *PlogsHandler) Plog(c web.C, w http.ResponseWriter, r *http.Request) {
+func (h *PlogsHandler) Plog(c context.Context, w http.ResponseWriter, r *http.Request) {
 
 	if service.BeforeAuth(w, r) == false {
 		return
 	}
 
-	id, _ := strconv.Atoi(c.URLParams["id"])
+	id, _ := strconv.Atoi(pat.Param(c, "id"))
 	plog := model.Plog{}
 	plog.Fetch(id)
 	if plog.Id == 0 {
@@ -56,7 +57,7 @@ func (h *PlogsHandler) Plog(c web.C, w http.ResponseWriter, r *http.Request) {
 	io.WriteString(w, string(response))
 }
 
-func (h *PlogsHandler) CreatePlog(c web.C, w http.ResponseWriter, r *http.Request) {
+func (h *PlogsHandler) CreatePlog(c context.Context, w http.ResponseWriter, r *http.Request) {
 
 	if service.BeforeAuth(w, r) == false {
 		return

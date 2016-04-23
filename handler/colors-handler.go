@@ -7,7 +7,8 @@ import (
 	"github.com/funnythingz/go-plog-api/model"
 	"github.com/funnythingz/go-plog-api/services"
 	_ "github.com/k0kubun/pp"
-	"github.com/zenazn/goji/web"
+	"goji.io/pat"
+	"golang.org/x/net/context"
 	"io"
 	"net/http"
 	"net/url"
@@ -18,7 +19,7 @@ import (
 
 type ColorsHandler struct{}
 
-func (h *ColorsHandler) Colors(c web.C, w http.ResponseWriter, r *http.Request) {
+func (h *ColorsHandler) Colors(c context.Context, w http.ResponseWriter, r *http.Request) {
 
 	if service.BeforeAuth(w, r) == false {
 		return
@@ -40,13 +41,13 @@ func (h *ColorsHandler) Colors(c web.C, w http.ResponseWriter, r *http.Request) 
 	io.WriteString(w, string(response))
 }
 
-func (h *ColorsHandler) Color(c web.C, w http.ResponseWriter, r *http.Request) {
+func (h *ColorsHandler) Color(c context.Context, w http.ResponseWriter, r *http.Request) {
 
 	if service.BeforeAuth(w, r) == false {
 		return
 	}
 
-	id, _ := strconv.Atoi(c.URLParams["id"])
+	id, _ := strconv.Atoi(pat.Param(c, "id"))
 	color := model.Color{}
 	color.Fetch(id)
 	if color.Id == 0 {
@@ -57,7 +58,7 @@ func (h *ColorsHandler) Color(c web.C, w http.ResponseWriter, r *http.Request) {
 	io.WriteString(w, string(response))
 }
 
-func (h *ColorsHandler) CreateColor(c web.C, w http.ResponseWriter, r *http.Request) {
+func (h *ColorsHandler) CreateColor(c context.Context, w http.ResponseWriter, r *http.Request) {
 
 	if service.BeforeAuth(w, r) == false {
 		return

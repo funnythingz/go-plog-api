@@ -8,7 +8,6 @@ import (
 
 	"goji.io"
 	"goji.io/pat"
-	"golang.org/x/net/context"
 )
 
 var (
@@ -25,17 +24,14 @@ func init() {
 	mux := goji.NewMux()
 
 	// Plogs
-	mux.HandlerFuncC(pat.Get("/api/v1/plogs"), plogsHandler.Plogs)
-	mux.HandlerFuncC(pat.Post("/api/v1/plogs"), plogsHandler.CreatePlog)
-	mux.HandlerFuncC(pat.Get(regexp.MustCompile(`^/api/v1/plogs/(?P<id>\d+)$`)), plogsHandler.Plog)
+	mux.HandleFuncC(pat.Get("/api/v1/plogs"), plogsHandler.Plogs)
+	mux.HandleFuncC(pat.Post("/api/v1/plogs"), plogsHandler.CreatePlog)
+	mux.HandleFuncC(pat.Get(regexp.MustCompile(`^/api/v1/plogs/(?P<id>\d+)$`)), plogsHandler.Plog)
 
 	// Colors
-	mux.HandlerFuncC(pat.Get("/v1/colors"), colorsHandler.Colors)
-	mux.HandlerFuncC(pat.Post("/v1/colors"), colorsHandler.CreateColor)
-	mux.HandlerFuncC(pat.Get(regexp.MustCompile(`^/api/v1/colors/(?P<id>\d+)$`)), colorsHandler.Color)
-
-	// Exception
-	mux.NotFound(exceptionHandler.NotFound)
+	mux.HandleFuncC(pat.Get("/v1/colors"), colorsHandler.Colors)
+	mux.HandleFuncC(pat.Post("/v1/colors"), colorsHandler.CreateColor)
+	mux.HandleFuncC(pat.Get(regexp.MustCompile(`^/api/v1/colors/(?P<id>\d+)$`)), colorsHandler.Color)
 
 	// Serve
 	http.Handle("/", mux)
