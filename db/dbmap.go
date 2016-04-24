@@ -43,6 +43,8 @@ type connection struct {
 	Encoding string `toml:"encoding"`
 	Host     string `toml:"host"`
 	Database string `toml:"database"`
+	Username string `toml:"username"`
+	Password string `toml:"password"`
 }
 
 type Config struct {
@@ -72,11 +74,17 @@ func DbConnect(env string) {
 		}()
 
 		username = func() string {
-			return dbEnv.Username
+			if dbEnv.Username != "" {
+				return dbEnv.Username
+			}
+			return config.Connection.Username
 		}()
 
 		password = func() string {
-			return dbEnv.Password
+			if dbEnv.Password != "" {
+				return dbEnv.Password
+			}
+			return config.Connection.Password
 		}()
 
 		database = func() string {
