@@ -9,18 +9,12 @@ port     = "3306"
 [Databases]
   [Databases.local_development]
   database = "local_dev"
-  username = "username"
-  password = "password"
 
   [Databases.development]
   database = "dev"
-  username = "username"
-  password = "password"
 
   [Databases.test]
   database = "test"
-  username = "username"
-  password = "password"
 
   [Databases.production]
   database = "production"
