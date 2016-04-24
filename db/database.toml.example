@@ -7,14 +7,23 @@ password = "password"
 port     = "3306"
 
 [Databases]
+  [Databases.local_development]
+  database = "local_dev"
+  username = "username"
+  password = "password"
+
   [Databases.development]
-  database = "iroiro"
+  database = "dev"
+  username = "username"
+  password = "password"
 
   [Databases.test]
-  database = "iroiro_test"
+  database = "test"
+  username = "username"
+  password = "password"
 
   [Databases.production]
-  database = "iroiro"
+  database = "production"
   host     = "0.0.0.0"
   username = "username"
   password = "password"
