@@ -24,7 +24,7 @@ func (m *Plog) Update() {
 
 func (m *Plog) Fetch(id int) {
 	db.Dbmap.Find(&m, id).First(&m)
-	log.Printf("=========:%v", m.Color.Entity.Id)
+	log.Printf("=========:%v", m)
 	m.Color.Fetch(m.Color.Entity.Id)
 }
 
