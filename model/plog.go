@@ -3,7 +3,6 @@ package model
 import (
 	"github.com/funnythingz/go-plog-api/db"
 	_ "github.com/k0kubun/pp"
-	"log"
 )
 
 type Plog struct {
