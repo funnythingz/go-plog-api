@@ -3,6 +3,7 @@ package model
 import (
 	"github.com/funnythingz/go-plog-api/db"
 	_ "github.com/k0kubun/pp"
+	"log"
 )
 
 type Plog struct {
@@ -23,6 +24,7 @@ func (m *Plog) Update() {
 
 func (m *Plog) Fetch(id int) {
 	db.Dbmap.Find(&m, id).First(&m)
+	log.Printf("=========:%v", m.Color.Entity.Id)
 	m.Color.Fetch(m.Color.Entity.Id)
 }
 
