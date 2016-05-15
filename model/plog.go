@@ -23,8 +23,7 @@ func (m *Plog) Update() {
 }
 
 func (m *Plog) Fetch(id int) {
-	db.Dbmap.Find(&m, id).First(&m)
-	m.Color.Fetch(m.ColorId)
+	db.Dbmap.Find(&m, id).First(&m).Model(&m).Related(&m.Color)
 }
 
 type PlogList struct {
