@@ -12,6 +12,7 @@ import (
 var (
 	exceptionHandler = &handler.ExceptionHandler{}
 	plogsHandler     = &handler.PlogsHandler{}
+	commentsHandler  = &handler.CommentsHandler{}
 	colorsHandler    = &handler.ColorsHandler{}
 )
 
@@ -26,6 +27,11 @@ func init() {
 	mux.HandleFuncC(pat.Get("/api/v1/plogs"), plogsHandler.Plogs)
 	mux.HandleFuncC(pat.Post("/api/v1/plogs"), plogsHandler.CreatePlog)
 	mux.HandleFuncC(pat.Get("/api/v1/plogs/:id"), plogsHandler.Plog)
+
+	// Comments
+	mux.HandleFuncC(pat.Get("/api/v1/comments"), commentsHandler.Comments)
+	mux.HandleFuncC(pat.Post("/api/v1/comments"), commentsHandler.CreateComment)
+	mux.HandleFuncC(pat.Get("/api/v1/comments/:id"), commentsHandler.Comment)
 
 	// Colors
 	mux.HandleFuncC(pat.Get("/api/v1/colors"), colorsHandler.Colors)
