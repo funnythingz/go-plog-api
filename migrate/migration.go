@@ -31,16 +31,19 @@ func main() {
 
 func Reset() {
 	db.Dbmap.DropTableIfExists(&model.Plog{})
+	db.Dbmap.DropTableIfExists(&model.Comment{})
 	db.Dbmap.DropTableIfExists(&model.Color{})
 	Create()
 }
 
 func Create() {
 	db.Dbmap.CreateTable(&model.Plog{})
+	db.Dbmap.CreateTable(&model.Comment{})
 	db.Dbmap.CreateTable(&model.Color{})
 }
 
 func Migrate() {
 	db.Dbmap.AutoMigrate(&model.Plog{})
+	db.Dbmap.AutoMigrate(&model.Comment{})
 	db.Dbmap.AutoMigrate(&model.Color{})
 }

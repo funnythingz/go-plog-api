@@ -7,9 +7,10 @@ import (
 
 type Plog struct {
 	Entity
-	Color   Color  `json:"color"`
-	ColorId int    `json:"color_id"`
-	Content string `json:"content"`
+	ColorId  int       `json:"color_id"`
+	Content  string    `json:"content"`
+	Color    Color     `json:"color"`
+	Comments []Comment `json:"comment_list"`
 }
 
 func (m *Plog) Commit() {
@@ -22,7 +23,7 @@ func (m *Plog) Update() {
 }
 
 func (m *Plog) Fetch(id int) {
-	db.Dbmap.Find(&m, id).First(&m).Related(&m.Color)
+	db.Dbmap.Find(&m, id).First(&m).Related(&m.Color).Related(&m.Comments)
 }
 
 type PlogList struct {
@@ -31,7 +32,7 @@ type PlogList struct {
 
 func (m *PlogList) Fetch(permit int, page int) {
 	db.Dbmap.Order("id desc").Offset((page - 1) * permit).Limit(permit).Find(&m.PlogList).Offset(page * permit).Limit(permit)
-	for i, iro := range m.PlogList {
-		m.PlogList[i].Fetch(iro.Id)
+	for i, plog := range m.PlogList {
+		m.PlogList[i].Fetch(plog.Id)
 	}
 }
