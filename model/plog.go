@@ -14,8 +14,7 @@ type Plog struct {
 
 func (m *Plog) Commit() {
 	db.Dbmap.NewRecord(m)
-	db.Dbmap.Create(&m)
-	m.Fetch(m.Id)
+	db.Dbmap.Create(&m).Related(&m.Color)
 }
 
 func (m *Plog) Update() {
@@ -23,7 +22,7 @@ func (m *Plog) Update() {
 }
 
 func (m *Plog) Fetch(id int) {
-	db.Dbmap.Find(&m, id).First(&m).Model(&m).Related(&m.Color)
+	db.Dbmap.Find(&m, id).First(&m).Related(&m.Color)
 }
 
 type PlogList struct {
