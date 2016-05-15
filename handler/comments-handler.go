@@ -64,7 +64,7 @@ func (h *CommentsHandler) CreateComment(c context.Context, w http.ResponseWriter
 	}
 
 	content := r.FormValue("comment[content]")
-	colorId, _ := strconv.Atoi(r.FormValue("color[color_id]"))
+	plogId, _ := strconv.Atoi(r.FormValue("plog[plog_id]"))
 
 	// Validation
 	errors := []string{}
@@ -82,7 +82,7 @@ func (h *CommentsHandler) CreateComment(c context.Context, w http.ResponseWriter
 	}
 
 	comment := model.Comment{
-		ColorId: colorId,
+		PlogId:  plogId,
 		Content: content,
 	}
 
