@@ -82,11 +82,6 @@ func (h *PlogsHandler) CreatePlog(c context.Context, w http.ResponseWriter, r *h
 	}
 
 	plog := model.Plog{
-		Color: model.Color{
-			Entity: model.Entity{
-				Id: colorId,
-			},
-		},
 		ColorId: colorId,
 		Content: content,
 	}

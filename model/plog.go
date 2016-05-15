@@ -13,7 +13,7 @@ type Plog struct {
 }
 
 func (m *Plog) Commit() {
-	db.Dbmap.NewRecord(&m)
+	db.Dbmap.NewRecord(m)
 	db.Dbmap.Create(&m)
 	m.Fetch(m.Id)
 }
